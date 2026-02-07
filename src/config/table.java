@@ -22,7 +22,7 @@ public class table {
                 "password TEXT NOT NULL" +
                 ");";
 
-        try (Connection conn = DBcon.getConnection();
+        try (Connection conn = DBcon.connectDB();
              Statement stmt = conn.createStatement()) {
 
             stmt.execute(sql);
