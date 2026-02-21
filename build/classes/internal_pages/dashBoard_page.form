@@ -14,7 +14,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-92,0,0,2,-8"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-52,0,0,2,-85"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -22,97 +22,68 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="35" green="15" red="5c" type="rgb"/>
-        </Property>
-      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="744" height="174"/>
+          <AbsoluteConstraints x="0" y="0" width="670" height="430"/>
         </Constraint>
       </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
+        <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel3">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="99" red="cc" type="rgb"/>
-            </Property>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="490" y="0" width="190" height="180"/>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="190" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="180" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-        </Container>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Century Gothic" size="30" style="1"/>
+              <Font name="Segoe UI" size="20" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Velvet Cafe V1.1"/>
+            <Property name="text" type="java.lang.String" value="Coffe Shop Management System "/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="20" width="250" height="-1"/>
+              <AbsoluteConstraints x="51" y="40" width="300" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Additional System description"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="37" green="40" red="5d" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="ADDITIONAL SYSTEM DESCRIPTION"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="40" y="60" width="140" height="-1"/>
+              <AbsoluteConstraints x="220" y="130" width="250" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPanel" name="jPanel2">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="99" green="ff" red="ff" type="rgb"/>
-        </Property>
-      </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="170" width="744" height="220"/>
-        </Constraint>
-      </Constraints>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-      <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel4">
+        <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="35" green="15" red="5c" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="99" red="ff" type="rgb"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel() {&#xd;&#xa;    @Override&#xd;&#xa;    protected void paintComponent(java.awt.Graphics g) {&#xd;&#xa;        java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();&#xd;&#xa;        g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);&#xd;&#xa;        &#xd;&#xa;        int s = 8; // Shadow spread&#xd;&#xa;        // Background Shadow for jPanel2 (Spread Bottom-Left and Bottom-Right)&#xd;&#xa;        for (int i = 0; i &lt; s; i++) {&#xd;&#xa;            // Warm brown shadow tint&#xd;&#xa;            g2.setColor(new java.awt.Color(45, 30, 15, (int) (15 * (1.0 - (double)i / s))));&#xd;&#xa;            // Centered X, shifted Y for bottom-facing glow&#xd;&#xa;            g2.fillRoundRect(i, i + 4, getWidth() - (i * 2), getHeight() - s, 40, 40);&#xd;&#xa;        }&#xd;&#xa;        &#xd;&#xa;        // Cream Body: Centered horizontally to show shadow on both left and right&#xd;&#xa;        g2.setColor(new java.awt.Color(252, 248, 245)); &#xd;&#xa;        g2.fillRoundRect(s, 0, getWidth() - (s * 2), getHeight() - s, 40, 40);&#xd;&#xa;        g2.dispose();&#xd;&#xa;    }&#xd;&#xa;    {&#xd;&#xa;        setOpaque(false);&#xd;&#xa;        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 50));&#xd;&#xa;        &#xd;&#xa;        for (int i = 0; i &lt; 3; i++) {&#xd;&#xa;            javax.swing.JPanel card = new javax.swing.JPanel() {&#xd;&#xa;                @Override&#xd;&#xa;                protected void paintComponent(java.awt.Graphics g) {&#xd;&#xa;                    java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();&#xd;&#xa;                    g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);&#xd;&#xa;                    &#xd;&#xa;                    int cs = 12; // Deeper shadow spread for cards&#xd;&#xa;                    // Card Shadow (Brown tint, Bottom-Left/Right spread)&#xd;&#xa;                    for (int j = 0; j &lt; cs; j++) {&#xd;&#xa;                        g2.setColor(new java.awt.Color(55, 40, 25, (int) (35 * (1.0 - (double)j / cs))));&#xd;&#xa;                        g2.fillRoundRect(j, j + 4, getWidth() - (j * 2), getHeight() - cs, 30, 30);&#xd;&#xa;                    }&#xd;&#xa;                    &#xd;&#xa;                    // White Card body: Centered to show shadow on both sides&#xd;&#xa;                    g2.setColor(java.awt.Color.WHITE);&#xd;&#xa;                    g2.fillRoundRect(cs, 0, getWidth() - (cs * 2), getHeight() - cs, 30, 30);&#xd;&#xa;                    g2.dispose();&#xd;&#xa;                }&#xd;&#xa;            };&#xd;&#xa;            &#xd;&#xa;            card.setPreferredSize(new java.awt.Dimension(180, 210));&#xd;&#xa;            card.setOpaque(false);&#xd;&#xa;            card.setLayout(new java.awt.GridBagLayout());&#xd;&#xa;            this.add(card);&#xd;&#xa;        }&#xd;&#xa;    }&#xd;&#xa;}"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="20" width="660" height="280"/>
+              <AbsoluteConstraints x="70" y="160" width="530" height="180"/>
             </Constraint>
           </Constraints>
 
@@ -120,21 +91,162 @@
             <Property name="useNullLayout" type="boolean" value="false"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="GIF">
+            <Container class="javax.swing.JPanel" name="jPanel3">
               <Properties>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/Untitled design.gif"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel() {&#xd;&#xa;    @Override&#xd;&#xa;    protected void paintComponent(java.awt.Graphics g) {&#xd;&#xa;        java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();&#xd;&#xa;        g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);&#xd;&#xa;        &#xd;&#xa;        // Background Shadow for the large back panel (jPanel2)&#xd;&#xa;        // This creates that soft 3D &quot;lifted&quot; effect&#xd;&#xa;        for (int i = 0; i &lt; 6; i++) {&#xd;&#xa;            g2.setColor(new java.awt.Color(0, 0, 0, (int) (20 * (1.0 - i / 6.0))));&#xd;&#xa;            g2.fillRoundRect(i, i + 2, getWidth() - (i * 2), getHeight() - (i * 2), 40, 40);&#xd;&#xa;        }&#xd;&#xa;        &#xd;&#xa;        // The main cream-colored surface&#xd;&#xa;        g2.setColor(new java.awt.Color(252, 248, 245)); &#xd;&#xa;        g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 40, 40);&#xd;&#xa;        &#xd;&#xa;        g2.dispose();&#xd;&#xa;    }&#xd;&#xa;    {&#xd;&#xa;        // Makes the panel background transparent so the rounded corners look clean&#xd;&#xa;        setOpaque(false);&#xd;&#xa;    }&#xd;&#xa;}"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="140" y="10" width="190" height="180"/>
+                  <AbsoluteConstraints x="20" y="20" width="150" height="140"/>
                 </Constraint>
               </Constraints>
-            </Component>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+                <Property name="useNullLayout" type="boolean" value="false"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel2">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/Images/manage_user.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="]"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="30" y="20" width="110" height="110"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel4">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel() {&#xd;&#xa;    @Override&#xd;&#xa;    protected void paintComponent(java.awt.Graphics g) {&#xd;&#xa;        java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();&#xd;&#xa;        g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);&#xd;&#xa;        &#xd;&#xa;        // Background Shadow for the large back panel (jPanel2)&#xd;&#xa;        // This creates that soft 3D &quot;lifted&quot; effect&#xd;&#xa;        for (int i = 0; i &lt; 6; i++) {&#xd;&#xa;            g2.setColor(new java.awt.Color(0, 0, 0, (int) (20 * (1.0 - i / 6.0))));&#xd;&#xa;            g2.fillRoundRect(i, i + 2, getWidth() - (i * 2), getHeight() - (i * 2), 40, 40);&#xd;&#xa;        }&#xd;&#xa;        &#xd;&#xa;        // The main cream-colored surface&#xd;&#xa;        g2.setColor(new java.awt.Color(252, 248, 245)); &#xd;&#xa;        g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 40, 40);&#xd;&#xa;        &#xd;&#xa;        g2.dispose();&#xd;&#xa;    }&#xd;&#xa;    {&#xd;&#xa;        // Makes the panel background transparent so the rounded corners look clean&#xd;&#xa;        setOpaque(false);&#xd;&#xa;    }&#xd;&#xa;}"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="190" y="20" width="150" height="140"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+                <Property name="useNullLayout" type="boolean" value="false"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel3">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/Images/reports.png"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="40" y="10" width="70" height="120"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel5">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel() {&#xd;&#xa;    @Override&#xd;&#xa;    protected void paintComponent(java.awt.Graphics g) {&#xd;&#xa;        java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();&#xd;&#xa;        g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);&#xd;&#xa;        &#xd;&#xa;        // Background Shadow for the large back panel (jPanel2)&#xd;&#xa;        // This creates that soft 3D &quot;lifted&quot; effect&#xd;&#xa;        for (int i = 0; i &lt; 6; i++) {&#xd;&#xa;            g2.setColor(new java.awt.Color(0, 0, 0, (int) (20 * (1.0 - i / 6.0))));&#xd;&#xa;            g2.fillRoundRect(i, i + 2, getWidth() - (i * 2), getHeight() - (i * 2), 40, 40);&#xd;&#xa;        }&#xd;&#xa;        &#xd;&#xa;        // The main cream-colored surface&#xd;&#xa;        g2.setColor(new java.awt.Color(252, 248, 245)); &#xd;&#xa;        g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 40, 40);&#xd;&#xa;        &#xd;&#xa;        g2.dispose();&#xd;&#xa;    }&#xd;&#xa;    {&#xd;&#xa;        // Makes the panel background transparent so the rounded corners look clean&#xd;&#xa;        setOpaque(false);&#xd;&#xa;    }&#xd;&#xa;}&#xd;&#xa;"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="360" y="20" width="150" height="140"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+                <Property name="useNullLayout" type="boolean" value="false"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel5">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/Images/settings.png"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="40" y="20" width="70" height="110"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="24" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="37" green="40" red="5d" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="BREW &amp; BEAN V1.1"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="230" y="100" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel7">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="28" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Brew &amp; Bean Dashboard"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="40" y="10" width="-1" height="30"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="background">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="14" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Images/background_dashboard.png"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="0" y="-30" width="670" height="460"/>
+            </Constraint>
+          </Constraints>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

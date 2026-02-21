@@ -94,6 +94,7 @@ public class Loginform extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -104,15 +105,13 @@ public class Loginform extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/font1.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 200, 30));
 
-        loginform.setBackground(new java.awt.Color(255, 255, 204));
+        loginform.setBackground(new java.awt.Color(255, 255, 255));
         loginform.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        email.setBackground(new java.awt.Color(255, 255, 204));
         email.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         email.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 217, 200)));
         loginform.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 280, 40));
 
-        password.setBackground(new java.awt.Color(255, 255, 204));
         password.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(215, 194, 178), 1, true));
         loginform.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 280, 40));
@@ -202,7 +201,7 @@ public class Loginform extends javax.swing.JFrame {
 
         if (Email.isEmpty() || pass.isEmpty()) {
             JOptionPane.showMessageDialog(
-                this,
+                null,
                 "Type your User and Password.",
                 "Missing Information",
                 JOptionPane.WARNING_MESSAGE

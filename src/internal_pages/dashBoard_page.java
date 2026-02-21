@@ -5,6 +5,7 @@
  */
 package internal_pages;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 /**
  *
  * @author Angie
@@ -16,20 +17,10 @@ public class dashBoard_page extends javax.swing.JInternalFrame {
      */
     public dashBoard_page() {
         initComponents();
-    
-      java.net.URL gifURL = getClass().getResource("/Images/Untitled design.gif");
-    if (gifURL == null) {
-        System.out.println("GIF NOT FOUND");
-        return;
-    }
-
-    ImageIcon gifIcon = new ImageIcon(gifURL);
-
-    GIF.setIcon(gifIcon);
-    GIF.setOpaque(false); // 🔥 THIS IS THE KEY
-    
-    jPanel4.revalidate();
-    jPanel4.repaint();
+    this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
+        BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
+        bi.setNorthPane(null);
+ 
     }
 
     /**
@@ -42,72 +33,227 @@ public class dashBoard_page extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int s = 8; // Shadow spread
+                // Background Shadow for jPanel2 (Spread Bottom-Left and Bottom-Right)
+                for (int i = 0; i < s; i++) {
+                    // Warm brown shadow tint
+                    g2.setColor(new java.awt.Color(45, 30, 15, (int) (15 * (1.0 - (double)i / s))));
+                    // Centered X, shifted Y for bottom-facing glow
+                    g2.fillRoundRect(i, i + 4, getWidth() - (i * 2), getHeight() - s, 40, 40);
+                }
+
+                // Cream Body: Centered horizontally to show shadow on both left and right
+                g2.setColor(new java.awt.Color(252, 248, 245)); 
+                g2.fillRoundRect(s, 0, getWidth() - (s * 2), getHeight() - s, 40, 40);
+                g2.dispose();
+            }
+            {
+                setOpaque(false);
+                setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 50));
+
+                for (int i = 0; i < 3; i++) {
+                    javax.swing.JPanel card = new javax.swing.JPanel() {
+                        @Override
+                        protected void paintComponent(java.awt.Graphics g) {
+                            java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                            g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                            int cs = 12; // Deeper shadow spread for cards
+                            // Card Shadow (Brown tint, Bottom-Left/Right spread)
+                            for (int j = 0; j < cs; j++) {
+                                g2.setColor(new java.awt.Color(55, 40, 25, (int) (35 * (1.0 - (double)j / cs))));
+                                g2.fillRoundRect(j, j + 4, getWidth() - (j * 2), getHeight() - cs, 30, 30);
+                            }
+
+                            // White Card body: Centered to show shadow on both sides
+                            g2.setColor(java.awt.Color.WHITE);
+                            g2.fillRoundRect(cs, 0, getWidth() - (cs * 2), getHeight() - cs, 30, 30);
+                            g2.dispose();
+                        }
+                    };
+
+                    card.setPreferredSize(new java.awt.Dimension(180, 210));
+                    card.setOpaque(false);
+                    card.setLayout(new java.awt.GridBagLayout());
+                    this.add(card);
+                }
+            }
+        };
+        jPanel3 = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                // Background Shadow for the large back panel (jPanel2)
+                // This creates that soft 3D "lifted" effect
+                for (int i = 0; i < 6; i++) {
+                    g2.setColor(new java.awt.Color(0, 0, 0, (int) (20 * (1.0 - i / 6.0))));
+                    g2.fillRoundRect(i, i + 2, getWidth() - (i * 2), getHeight() - (i * 2), 40, 40);
+                }
+
+                // The main cream-colored surface
+                g2.setColor(new java.awt.Color(252, 248, 245)); 
+                g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 40, 40);
+
+                g2.dispose();
+            }
+            {
+                // Makes the panel background transparent so the rounded corners look clean
+                setOpaque(false);
+            }
+        };
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        GIF = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                // Background Shadow for the large back panel (jPanel2)
+                // This creates that soft 3D "lifted" effect
+                for (int i = 0; i < 6; i++) {
+                    g2.setColor(new java.awt.Color(0, 0, 0, (int) (20 * (1.0 - i / 6.0))));
+                    g2.fillRoundRect(i, i + 2, getWidth() - (i * 2), getHeight() - (i * 2), 40, 40);
+                }
+
+                // The main cream-colored surface
+                g2.setColor(new java.awt.Color(252, 248, 245)); 
+                g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 40, 40);
+
+                g2.dispose();
+            }
+            {
+                // Makes the panel background transparent so the rounded corners look clean
+                setOpaque(false);
+            }
+        };
+        jLabel3 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                // Background Shadow for the large back panel (jPanel2)
+                // This creates that soft 3D "lifted" effect
+                for (int i = 0; i < 6; i++) {
+                    g2.setColor(new java.awt.Color(0, 0, 0, (int) (20 * (1.0 - i / 6.0))));
+                    g2.fillRoundRect(i, i + 2, getWidth() - (i * 2), getHeight() - (i * 2), 40, 40);
+                }
+
+                // The main cream-colored surface
+                g2.setColor(new java.awt.Color(252, 248, 245)); 
+                g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 40, 40);
+
+                g2.dispose();
+            }
+            {
+                // Makes the panel background transparent so the rounded corners look clean
+                setOpaque(false);
+            }
+        }
+        ;
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(92, 21, 53));
-        jPanel1.setLayout(null);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(204, 153, 0));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel3);
-        jPanel3.setBounds(490, 0, 190, 180);
-
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 30)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Velvet Cafe V1.1");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(30, 20, 250, 38);
+        jLabel1.setText("Coffe Shop Management System ");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 40, 300, -1));
 
-        jLabel2.setText("Additional System description");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(40, 60, 140, 14);
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(93, 64, 55));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("ADDITIONAL SYSTEM DESCRIPTION");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 250, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 744, 174));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setForeground(new java.awt.Color(255, 153, 102));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 153));
-        jPanel2.setLayout(null);
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(92, 21, 53));
+        jLabel2.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/manage_user.png"))); // NOI18N
+        jLabel2.setText("]");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 110, 110));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, 140));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        GIF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        GIF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Untitled design.gif"))); // NOI18N
-        jPanel4.add(GIF, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 190, 180));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/reports.png"))); // NOI18N
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, 120));
 
-        jPanel2.add(jPanel4);
-        jPanel4.setBounds(30, 20, 660, 280);
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 150, 140));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 744, 220));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/settings.png"))); // NOI18N
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 70, 110));
+
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 150, 140));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 530, 180));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(93, 64, 55));
+        jLabel6.setText("BREW & BEAN V1.1");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Brew & Bean Dashboard");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, 30));
+
+        background.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        background.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background_dashboard.png"))); // NOI18N
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 670, 460));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel GIF;
+    private javax.swing.JLabel background;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }
+

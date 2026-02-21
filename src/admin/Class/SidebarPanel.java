@@ -1,7 +1,8 @@
 package admin.Class;
 
 import admin.Admindashboard;
-import internal_pages.userTable;
+import internal_pages.dashBoard_page;
+import internal_pages.user_page;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -31,14 +32,12 @@ public class SidebarPanel extends JPanel {
         add(menuTitle("MENU"));
         add(Box.createVerticalStrut(20));
 
-        add(menuButton("Home", () -> openHome()));
+        add(menuButton("Dashboard", () -> openDashboard()));
         add(menuButton("Orders", () -> openOrders()));
-        add(menuButton("Menu", () -> openMenu()));
-        add(menuButton("Reports", () -> openReports()));         
+        add(menuButton("Menu", () -> openMenu()));         
         add(menuButton("Users", () -> openUsers()));
-        add(menuButton("Settings", () -> openSettings()));
         add(Box.createVerticalGlue());
-        add(menuButton("Logout", () -> logout()));
+        add(menuButton("Account", () -> openAccount()));
     }
 
    
@@ -95,45 +94,40 @@ private void showInternalFrame(JInternalFrame newFrame) {
     newFrame.setBorder(null);
     ((javax.swing.plaf.basic.BasicInternalFrameUI)newFrame.getUI()).setNorthPane(null);
 
-    newFrame.setSize(800, 500);
+    newFrame.setSize(890, 500
+    );
     newFrame.setLocation(220, 0);
 
     newFrame.setVisible(true);
     
     try {
-        newFrame.setSelected(true); // Bring focus to the table
+        newFrame.setSelected(true); 
     } catch (java.beans.PropertyVetoException e) {}
 
     contentPanel.revalidate();
     contentPanel.repaint();
 }
- private void openHome() {
+ private void openDashboard() {
     
-    // showInternalFrame(new HomeInternalFrame());
-    System.out.println("Home Linked");
+    showInternalFrame(new dashBoard_page());
+   
 }
 private void openOrders() {
-    // showInternalFrame(new orderTable());
+   
 }
 private void openUsers() {
-    // Directly linked to your userTable class
-    showInternalFrame(new userTable());
+ 
+    showInternalFrame(new user_page());
 }
 
 private void openMenu() {
-    // showInternalFrame(new productTable());
+
 }
 
-private void openReports() {
-    // showInternalFrame(new reportTable());
-}
-
-private void openSettings() {
-    // showInternalFrame(new settingsTable());
-}
-    private void logout() {
-        JOptionPane.showMessageDialog(this, "Logging out...");
+    private void openAccount() {
+        
+    //   JOptionPane.showMessageDialog(this, "Logging out...");
        
-        SwingUtilities.getWindowAncestor(this).dispose();
+      //  SwingUtilities.getWindowAncestor(this).dispose();
     }
 }

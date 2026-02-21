@@ -12,12 +12,12 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  *
  * @author Angie
  */
-public class userTable extends javax.swing.JInternalFrame {
+public class user_page extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form userPage
      */
-    public userTable() {
+    public user_page() {
         initComponents();
         
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
@@ -56,7 +56,7 @@ public class userTable extends javax.swing.JInternalFrame {
         userTable.setPreferredSize(new java.awt.Dimension(760, 420));
         jScrollPane1.setViewportView(userTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 740, 390));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 700, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
