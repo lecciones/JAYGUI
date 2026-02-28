@@ -34,7 +34,7 @@ public class SidebarPanel extends JPanel {
 
         add(menuButton("Dashboard", () -> openDashboard()));
         add(menuButton("Orders", () -> openOrders()));
-        add(menuButton("Menu", () -> openMenu()));         
+        add(menuButton("Menu", () -> openProducts()));         
         add(menuButton("Users", () -> openUsers()));
         add(Box.createVerticalGlue());
         add(menuButton("Account", () -> openAccount()));
@@ -120,7 +120,7 @@ private void openUsers() {
     showInternalFrame(new user_page());
 }
 
-private void openMenu() {
+private void openProducts() {
 
 }
 

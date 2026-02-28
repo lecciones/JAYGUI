@@ -12,7 +12,11 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import admin.Admindashboard;
 import User.Userdashboard;
+import config.Singleton;
 import java.awt.Color;
+import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author Angie
@@ -196,42 +200,53 @@ public class Loginform extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void log_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_log_panelMouseClicked
-          String Email = email.getText().trim();
-        String pass = passUtil.hashPassword(new String(password.getPassword()));
+      String Email = email.getText().toString();
+            String pass = password.getText().toString();
+            if(email.getText().isEmpty() || password.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "All Fields are Required!");
+            }else{
+         try {
+    DBcon dbc = new DBcon();
+    ResultSet rs = dbc.getData("SELECT * FROM tbl_users WHERE email = '" + Email + "'");
 
-        if (Email.isEmpty() || pass.isEmpty()) {
-            JOptionPane.showMessageDialog(
-                null,
-                "Type your User and Password.",
-                "Missing Information",
-                JOptionPane.WARNING_MESSAGE
-            );
-            return;
+    if (rs.next()) {
+        String hashedpass = rs.getString("password");
+        String rehashedPassword = passUtil.hashPassword(pass);
+
+        if (Email.equals(rs.getString("email")) && hashedpass.equals(rehashedPassword)) {
+            
+ 
+            Singleton singletonInstance = Singleton.getInstance();
+            singletonInstance.setId(rs.getInt("user_id"));
+            singletonInstance.setFirstname(rs.getString("u_fname"));
+            singletonInstance.setLastname(rs.getString("u_lname"));
+            singletonInstance.setEmail(rs.getString("email"));
+            singletonInstance.setU_status(rs.getString("u_status"));
+
+            JOptionPane.showMessageDialog(null, "Login Success!");
+            
+
+            String role = rs.getString("type");
+            if ("Admin".equalsIgnoreCase(role)) {
+                new Admindashboard().setVisible(true);
+            } else {
+                new Userdashboard().setVisible(true);
+            }
+
+
+            this.dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid Account!");
+            password.setText("");
         }
-
-       DBcon con = new DBcon();
-       String sql = "SELECT * FROM users WHERE email = ? AND password = ? AND u_status = ?";
-       
-       String account_Type = con.authenticate(sql, email.getText(), password.getText(), "Active");
-       
-       if(account_Type != null){
-           
-           JOptionPane.showMessageDialog(null, "Log in successful");
-           if(account_Type.equals("Admin")){
-               Admindashboard ad = new Admindashboard();
-               ad.setVisible(true);
-               this.dispose();
-           }else if (account_Type.equals("User")){
-               Userdashboard ud = new Userdashboard();
-               ud.setVisible(true);
-               this.dispose();
-           }else{
-               JOptionPane.showMessageDialog(null, "Invalid Account Type!");
-               return;
-           }
-       }else{
-           JOptionPane.showMessageDialog(null, "Invalid Credentials / Account Inactive!");
-       }
+    } else {
+        JOptionPane.showMessageDialog(null, "User not found!");
+    }
+} catch (SQLException ex) {
+    JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage());
+}
+            }
     }//GEN-LAST:event_log_panelMouseClicked
 
     private void log_panelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_log_panelMouseEntered

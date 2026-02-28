@@ -9,6 +9,8 @@ import java.sql.Connection;
 import config.passUtil;
 import config.DBcon;
 import java.awt.Color;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 /**
  *
  * @author Angie
@@ -20,6 +22,15 @@ public class Registrationform extends javax.swing.JFrame {
      */
     public Registrationform() {
         initComponents();
+    }
+     int validateRegister(){
+         int result;
+        if(fname.getText().isEmpty() || lname.getText().isEmpty() || password.getText().isEmpty()){
+            result = 0;
+        }else{
+            result = 1;
+        }
+        return result;
     }
 
     /**
@@ -83,10 +94,10 @@ public class Registrationform extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        first = new javax.swing.JTextField();
-        last = new javax.swing.JTextField();
+        fname = new javax.swing.JTextField();
+        lname = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
-        pass = new javax.swing.JPasswordField();
+        password = new javax.swing.JPasswordField();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -101,7 +112,7 @@ public class Registrationform extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/font1.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 190, 40));
 
-        registerPanel.setBackground(new java.awt.Color(255, 255, 204));
+        registerPanel.setBackground(new java.awt.Color(255, 255, 255));
         registerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sign_btn.setBackground(new java.awt.Color(217, 167, 60));
@@ -156,30 +167,26 @@ public class Registrationform extends javax.swing.JFrame {
         });
         registerPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
 
-        first.setBackground(new java.awt.Color(255, 255, 204));
-        first.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        first.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 217, 200), 1, true), "First Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
-        registerPanel.add(first, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 280, 60));
+        fname.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        fname.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 217, 200), 1, true), "First Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
+        registerPanel.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 280, 60));
 
-        last.setBackground(new java.awt.Color(255, 255, 204));
-        last.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        last.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 217, 200), 1, true), "Last Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
-        registerPanel.add(last, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 280, 60));
+        lname.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lname.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 217, 200), 1, true), "Last Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
+        registerPanel.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 280, 60));
 
-        email.setBackground(new java.awt.Color(255, 255, 204));
         email.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         email.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 217, 200), 1, true), "Email Address", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
         registerPanel.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 280, 60));
 
-        pass.setBackground(new java.awt.Color(255, 255, 204));
-        pass.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
-        pass.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(215, 194, 178), 1, true), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
-        pass.addActionListener(new java.awt.event.ActionListener() {
+        password.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
+        password.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(215, 194, 178), 1, true), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
+        password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passActionPerformed(evt);
+                passwordActionPerformed(evt);
             }
         });
-        registerPanel.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 280, 60));
+        registerPanel.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 280, 60));
 
         getContentPane().add(registerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 340, 410));
 
@@ -198,35 +205,45 @@ public class Registrationform extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void sign_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_btnMouseClicked
-   String firstName = first.getText().trim();
-String lastName  = last.getText().trim();
-String emailAddr = email.getText().trim();
-String rawPassword = new String(pass.getPassword()).trim();
+     int check = validateRegister();
+        if(check == 1){
+            
 
-if (firstName.isEmpty() || lastName.isEmpty() ||
-    emailAddr.isEmpty() || rawPassword.isEmpty()) {
-
-    JOptionPane.showMessageDialog(
-        this,
-        "Please fill in all fields:\nFirst Name, Last Name, Email, and Password.",
-        "Missing Information",
-        JOptionPane.WARNING_MESSAGE
-    );
-    return;
-}
-
-// hash AFTER validation
-String hashedPassword = passUtil.hashPassword(rawPassword);
-
-DBcon con = new DBcon();
-String sql = "INSERT INTO users(firstname, lastname, email, password, type, u_status) VALUES (?, ?, ?, ?,?,?)";
-con.addRecord(sql, firstName, lastName, emailAddr, hashedPassword, "User", "Pending");
-
+                String pass;
+            try {
+                pass = passUtil.hashPassword(password.getText());
+          
+        
+            DBcon dbc = new DBcon();
+            int result = dbc.insertData("INSERT INTO tbl_users (u_fname, u_lname, email, password, u_status) "
+                    + "VALUES ('"+fname.getText()+"', '"+lname.getText()+"', '"+email.getText()+"', '"+pass+"', 'Pending')");
+            if(result == 1){
+                JOptionPane.showMessageDialog(null, "Successfully Registered!");
+                    Loginform  lf = new Loginform();
+                    this.dispose();
+                    lf.setVisible(true);
+              
+                    
+            }
+            else{
+                 System.out.println("Saving Data Failed!");
+            }
+} catch (Exception ex) { 
+       
+        System.out.println("Error: " + ex);
+    }
+      
+          
+            
+        }else{
+             JOptionPane.showMessageDialog(null, "All fields are required!");
+        }
+ 
     }//GEN-LAST:event_sign_btnMouseClicked
 
-    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_passActionPerformed
+    }//GEN-LAST:event_passwordActionPerformed
 
     private void sign_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_btnMouseEntered
         sign_btn.setBackground(new Color(198, 135, 65));
@@ -282,15 +299,15 @@ con.addRecord(sql, firstName, lastName, emailAddr, hashedPassword, "User", "Pend
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JTextField email;
-    private javax.swing.JTextField first;
+    private javax.swing.JTextField fname;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField last;
-    private javax.swing.JPasswordField pass;
+    private javax.swing.JTextField lname;
+    private javax.swing.JPasswordField password;
     private javax.swing.JPanel registerPanel;
     private javax.swing.JPanel sign_btn;
     // End of variables declaration//GEN-END:variables
