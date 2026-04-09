@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Point;
 import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 /**
@@ -27,19 +28,13 @@ public class Admindashboard extends javax.swing.JFrame {
 contentPanel.setBackground(new java.awt.Color(245, 241, 238)); 
 
 
-     SidebarPanel sidebar = new SidebarPanel(contentPanel);
-    sidebar.setVisible(false);
-    
-   getLayeredPane().add(sidebar, JLayeredPane.PALETTE_LAYER);
-    
 
-    hamburgerButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-        @Override
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            sidebar.toggle();
-            getLayeredPane().repaint();
-        }
-    });
+SidebarPanel sidebar = new SidebarPanel(contentPanel); sidebar.setVisible(false); getLayeredPane().add(sidebar, JLayeredPane.PALETTE_LAYER);
+
+
+
+
+ hamburgerButton1.addMouseListener(new java.awt.event.MouseAdapter() { @Override public void mouseClicked(java.awt.event.MouseEvent evt) { sidebar.toggle(); getLayeredPane().repaint(); } });
     this.addComponentListener(new java.awt.event.ComponentAdapter() {
         @Override
         public void componentResized(java.awt.event.ComponentEvent e) {
@@ -182,7 +177,7 @@ contentPanel.setBackground(new java.awt.Color(245, 241, 238));
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addGap(0, 420, Short.MAX_VALUE)
         );
 
         mainPanel.add(contentPanel, java.awt.BorderLayout.CENTER);
@@ -195,7 +190,7 @@ contentPanel.setBackground(new java.awt.Color(245, 241, 238));
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
         );
 
         pack();

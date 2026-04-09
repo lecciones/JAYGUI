@@ -2,7 +2,7 @@ package User.Class;
 
 import User.Class.*;
 import User.Userdashboard;
-import internal_pages.user_page;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -118,7 +118,7 @@ private void openOrders() {
 }
 private void openUsers() {
     // Directly linked to your user_page class
-    showInternalFrame(new user_page());
+   
 }
 
 private void openMenu() {

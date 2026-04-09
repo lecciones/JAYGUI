@@ -2,7 +2,6 @@ package admin.Class;
 
 import admin.Admindashboard;
 import internal_pages.dashBoard_page;
-import internal_pages.user_page;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -92,10 +91,9 @@ private void showInternalFrame(JInternalFrame newFrame) {
 
     contentPanel.add(newFrame);
     newFrame.setBorder(null);
-    ((javax.swing.plaf.basic.BasicInternalFrameUI)newFrame.getUI()).setNorthPane(null);
+       ((javax.swing.plaf.basic.BasicInternalFrameUI)newFrame.getUI()).setNorthPane(null);
 
-    newFrame.setSize(890, 500
-    );
+
     newFrame.setLocation(220, 0);
 
     newFrame.setVisible(true);
@@ -117,7 +115,7 @@ private void openOrders() {
 }
 private void openUsers() {
  
-    showInternalFrame(new user_page());
+   
 }
 
 private void openProducts() {

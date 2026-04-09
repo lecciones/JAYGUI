@@ -34,7 +34,6 @@ public class Landingform extends javax.swing.JFrame {
         logo = new javax.swing.JLabel();
         font1 = new javax.swing.JLabel();
         font2 = new javax.swing.JLabel();
-        beans = new javax.swing.JLabel();
         leaf = new javax.swing.JLabel();
         font3 = new javax.swing.JLabel();
         sign_btn = sign_btn = new javax.swing.JPanel() {
@@ -96,12 +95,6 @@ public class Landingform extends javax.swing.JFrame {
         font2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         font2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/font2.png"))); // NOI18N
         background.add(font2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 350, 120));
-
-        beans.setBackground(new java.awt.Color(255, 255, 255));
-        beans.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        beans.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/beans_design.png"))); // NOI18N
-        beans.setOpaque(true);
-        background.add(beans, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 200));
 
         leaf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         leaf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/leaf-.png"))); // NOI18N
@@ -322,7 +315,6 @@ public class Landingform extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JLabel background_image;
-    private javax.swing.JLabel beans;
     private javax.swing.JLabel font1;
     private javax.swing.JLabel font2;
     private javax.swing.JLabel font3;

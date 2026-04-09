@@ -7,14 +7,14 @@ package internal_pages;
 
 /**
  *
- * @author Angie
+ * @author admim
  */
-public class account_page extends javax.swing.JInternalFrame {
+public class Customers_page extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form account_page
+     * Creates new form Customers_page
      */
-    public account_page() {
+    public Customers_page() {
         initComponents();
     }
 
