@@ -5,6 +5,8 @@
  */
 package internal_pages;
 
+import java.awt.Color;
+
 /**
  *
  * @author Angie
@@ -28,27 +30,174 @@ public class Products_page extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        sign_btn = sign_btn = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+
+                // This makes the rounded edges smooth
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                // This tells the code: "Use whatever color is already set for this panel"
+                g2.setColor(getBackground());
+
+                // This only paints the rounded area
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+
+                g2.dispose();
+            }
+        };
+        // Crucial: Add this in your constructor to hide the "square" background
+        sign_btn.setOpaque(false);
+        jLabel5 = new javax.swing.JLabel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(166, 123, 91));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/A67B5B.png"))); // NOI18N
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 200, 50));
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/coffe.png"))); // NOI18N
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 60, 70));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 60));
+
+        jPanel3.setBackground(new java.awt.Color(253, 245, 230));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel4.setBackground(new java.awt.Color(166, 123, 91));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 670, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 430, Short.MAX_VALUE)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
+
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 60));
+
+        jLabel1.setBackground(new java.awt.Color(62, 39, 35));
+        jLabel1.setFont(new java.awt.Font("Rockwell", 1, 26)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(92, 50, 22));
+        jLabel1.setText("PRODUCT CATALOG");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/leaf-.png"))); // NOI18N
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 120, 110));
+
+        sign_btn.setBackground(new java.awt.Color(217, 167, 60));
+        sign_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sign_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sign_btnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sign_btnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sign_btnMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                sign_btnMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                sign_btnMouseReleased(evt);
+            }
+        });
+        sign_btn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Sign up");
+        sign_btn.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 60, 20));
+
+        jPanel3.add(sign_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 280, 40));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 430));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void sign_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_btnMouseClicked
+     /**   int check = validateRegister();
+        if(check == 1){
+
+            String pass;
+            try {
+                pass = passUtil.hashPassword(password.getText());
+
+                DBcon dbc = new DBcon();
+                int result = dbc.insertData("INSERT INTO tbl_users (u_fname, u_lname, email, password, u_status) "
+                    + "VALUES ('"+fname.getText()+"', '"+lname.getText()+"', '"+email.getText()+"', '"+pass+"', 'Pending')");
+                if(result == 1){
+                    JOptionPane.showMessageDialog(null, "Successfully Registered!");
+                    Loginform  lf = new Loginform();
+                    this.dispose();
+                    lf.setVisible(true);
+
+                }
+                else{
+                    System.out.println("Saving Data Failed!");
+                }
+            } catch (Exception ex) {
+
+                System.out.println("Error: " + ex);
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(null, "All fields are required!");
+        }
+   */
+    }//GEN-LAST:event_sign_btnMouseClicked
+
+    private void sign_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_btnMouseEntered
+        sign_btn.setBackground(new Color(198, 135, 65));
+    }//GEN-LAST:event_sign_btnMouseEntered
+
+    private void sign_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_btnMouseExited
+        sign_btn.setBackground(new Color(217,167,60));
+    }//GEN-LAST:event_sign_btnMouseExited
+
+    private void sign_btnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_btnMousePressed
+        sign_btn.setBackground(new Color(170, 110, 50));
+    }//GEN-LAST:event_sign_btnMousePressed
+
+    private void sign_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_btnMouseReleased
+        sign_btn.setBackground(new Color(217,167,60));
+    }//GEN-LAST:event_sign_btnMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel sign_btn;
     // End of variables declaration//GEN-END:variables
 }

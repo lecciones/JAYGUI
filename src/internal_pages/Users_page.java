@@ -5,7 +5,13 @@
  */
 package internal_pages;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -24,6 +30,61 @@ public class Users_page extends javax.swing.JInternalFrame {
          this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
     BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
     bi.setNorthPane(null);
+    
+    // 1. Basic Table Setup
+user_table.setRowHeight(35); // Slightly taller for that premium feel
+user_table.setShowGrid(false);
+user_table.setIntercellSpacing(new java.awt.Dimension(0, 0));
+user_table.setBackground(new Color(255, 252, 245)); // Very light cream base
+user_table.setBorder(null);
+
+// 2. Custom Header Styling
+user_table.getTableHeader().setOpaque(false);
+user_table.getTableHeader().setPreferredSize(new java.awt.Dimension(100, 40));
+
+user_table.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        // The warm tan color from the image header
+        setBackground(new Color(235, 215, 185)); 
+        setForeground(new Color(90, 60, 40)); // Dark brown text
+        setFont(new Font("Segoe UI", Font.BOLD, 15));
+        
+        setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 15));
+        return this;
+    }
+});
+
+
+user_table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        c.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        
+        if (isSelected) {
+            // Highlighting with a slightly darker tan/orange from the image buttons
+            c.setBackground(new Color(225, 190, 150)); 
+            c.setForeground(new Color(60, 30, 10)); 
+        } else {
+            // Zebra striping: Alternates between white and the light beige in the image
+            c.setBackground(row % 2 == 0 ? Color.WHITE : new Color(250, 243, 230));
+            c.setForeground(new Color(60, 40, 30)); // Deep brown text
+        }
+
+        ((JLabel)c).setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 15));
+        return c;
+    }
+});
+
+
+javax.swing.border.Border line = javax.swing.BorderFactory.createLineBorder(new Color(180, 160, 140), 1);
+jScrollPane1.setBorder(line);
+jScrollPane1.getViewport().setBackground(Color.WHITE);
     }
    
     
