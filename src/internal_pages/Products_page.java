@@ -127,8 +127,8 @@ public class Products_page extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(240, 240, 240));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Sign up");
-        sign_btn.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 60, 20));
+        jLabel5.setText("ADD NEW PRODUCT");
+        sign_btn.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 150, 20));
 
         jPanel3.add(sign_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 280, 40));
 

@@ -1,6 +1,7 @@
 package admin.Class;
 
 import admin.Admindashboard;
+import internal_pages.Users_page;
 import internal_pages.dashBoard_page;
 import java.awt.*;
 import javax.swing.*;
@@ -114,7 +115,7 @@ private void openOrders() {
    
 }
 private void openUsers() {
- 
+ showInternalFrame(new Users_page());
    
 }
 

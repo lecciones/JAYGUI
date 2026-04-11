@@ -5,13 +5,19 @@
  */
 package internal_pages;
 
+import config.DBcon;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
+import main.Userform;
 
 /**
  *
@@ -93,7 +99,7 @@ jScrollPane1.getViewport().setBackground(Color.WHITE);
   
     cc.displayData("SELECT u_id as 'ID', email as 'Email', "
                  + "u_fname as 'Full Name', password as 'Password', contact as 'Contact', "
-                 + "u_status as 'Status', type as 'Type', Image as 'Image' FROM users", user_table);
+                 + "u_status as 'Status', type as 'Type', Image as 'Image' FROM tbl_users", user_table);
 }
     
     @SuppressWarnings("unchecked")
@@ -107,11 +113,11 @@ jScrollPane1.getViewport().setBackground(Color.WHITE);
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        add = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        edit = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        delete = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
@@ -152,36 +158,80 @@ jScrollPane1.getViewport().setBackground(Color.WHITE);
         jLabel1.setText("USER MANAGEMENT");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add.setBackground(new java.awt.Color(220, 210, 190));
+        add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                addMousePressed(evt);
+            }
+        });
+        add.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(92, 50, 22));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Add User");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 30));
+        add.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 100, 30));
+        jPanel1.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 100, 30));
 
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        edit.setBackground(new java.awt.Color(235, 215, 185));
+        edit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                editMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                editMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editMousePressed(evt);
+            }
+        });
+        edit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(92, 50, 22));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Edit User");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 30));
+        edit.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 70, 30));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 110, 30));
+        jPanel1.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 110, 30));
 
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        delete.setBackground(new java.awt.Color(220, 210, 190));
+        delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteMouseExited(evt);
+            }
+        });
+        delete.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(92, 50, 22));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Delete User");
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 30));
+        delete.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 80, 30));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 120, 30));
+        jPanel1.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 120, 30));
 
+        jTextField1.setBackground(new java.awt.Color(253, 245, 230));
+        jTextField1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, java.awt.Color.gray, null, new java.awt.Color(153, 153, 153)));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -201,8 +251,98 @@ jScrollPane1.getViewport().setBackground(Color.WHITE);
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
+          JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();
+        Userform stf = new Userform();
+        stf.setVisible(true);
+        stf.action = "Add";
+        stf.st_label.setText("SAVE");
+    }//GEN-LAST:event_addMouseClicked
 
+    private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
+        int rowIndex = user_table.getSelectedRow();
+    if(rowIndex < 0){
+        JOptionPane.showMessageDialog(null, "Please Select an Item!");
+    }else{
+        TableModel model = user_table.getModel();
+        Userform stf = new Userform();
+        
+       
+        stf.u_id.setText(""+model.getValueAt(rowIndex, 0));
+        stf.fname.setText(""+model.getValueAt(rowIndex, 1));
+        stf.email.setText(""+model.getValueAt(rowIndex, 2));
+        stf.pword.setText(""+model.getValueAt(rowIndex, 3));
+        stf.uname.setText(model.getValueAt(rowIndex, 4).toString());
+        stf.con.setText(model.getValueAt(rowIndex, 5).toString());
+        stf.Status.setSelectedItem(model.getValueAt(rowIndex, 6).toString());
+        stf.type.setSelectedItem(model.getValueAt(rowIndex, 7).toString());
+
+        stf.setVisible(true);
+        stf.action = "Update";
+        stf.st_label.setText("UPDATE");
+        
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();
+    }
+
+    }//GEN-LAST:event_editMouseClicked
+
+    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+         int rowIndex = user_table.getSelectedRow();
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null, "Please select data first from the table!");
+        }else{
+            TableModel model = user_table.getModel();
+            Object value = model.getValueAt(rowIndex, 0);
+            String id = value.toString();
+            int a = JOptionPane.showConfirmDialog(null, "Are you sure to delete ID: "+id);
+            if(a == JOptionPane.YES_OPTION){
+                DBcon dbc = new DBcon();
+                int u_id = Integer.parseInt(id);
+                dbc.deleteData(u_id, "users", "u_id");
+                displayData();
+            }
+        }
+    }//GEN-LAST:event_deleteMouseClicked
+
+    private void addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseEntered
+       add.setBackground(new Color(245, 230, 210));
+    }//GEN-LAST:event_addMouseEntered
+
+    private void addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseExited
+      add.setBackground(new Color(252, 248, 240));
+    }//GEN-LAST:event_addMouseExited
+
+    private void addMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMousePressed
+         add.setBackground(new Color(230, 220, 200));
+    }//GEN-LAST:event_addMousePressed
+
+    private void editMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseEntered
+        edit.setBackground(new Color(225, 205, 175));
+    }//GEN-LAST:event_editMouseEntered
+
+    private void editMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseExited
+         edit.setBackground(new Color(235, 215, 185));
+    }//GEN-LAST:event_editMouseExited
+
+    private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
+        edit.setBackground(new Color(245, 230, 210));
+    }//GEN-LAST:event_deleteMouseEntered
+
+    private void deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseExited
+               edit.setBackground(new Color(252, 248, 240));
+    }//GEN-LAST:event_deleteMouseExited
+
+    private void editMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMousePressed
+        edit.setBackground(new Color(210, 188, 155));
+    }//GEN-LAST:event_editMousePressed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel add;
+    private javax.swing.JPanel delete;
+    private javax.swing.JPanel edit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -211,9 +351,6 @@ jScrollPane1.getViewport().setBackground(Color.WHITE);
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
