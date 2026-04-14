@@ -200,53 +200,65 @@ public class Loginform extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void log_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_log_panelMouseClicked
-      String Email = email.getText().toString();
-            String pass = password.getText().toString();
-            if(email.getText().isEmpty() || password.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "All Fields are Required!");
-            }else{
-         try {
-    DBcon dbc = new DBcon();
-    ResultSet rs = dbc.getData("SELECT * FROM tbl_users WHERE email = '" + Email + "'");
+    String Email = email.getText().toString();
+String pass = new String(password.getPassword());
 
-    if (rs.next()) {
-        String hashedpass = rs.getString("password");
-        String rehashedPassword = passUtil.hashPassword(pass);
+if (Email.isEmpty() || pass.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "All Fields are Required!");
+} else {
+    try {
+        DBcon dbc = new DBcon();
 
-        if (Email.equals(rs.getString("email")) && hashedpass.equals(rehashedPassword)) {
-            
- 
-            Singleton singletonInstance = Singleton.getInstance();
-            singletonInstance.setId(rs.getInt("user_id"));
-            singletonInstance.setFirstname(rs.getString("u_fname"));
-            singletonInstance.setLastname(rs.getString("u_lname"));
-            singletonInstance.setEmail(rs.getString("email"));
-            singletonInstance.setU_status(rs.getString("u_status"));
+        String query = "SELECT * FROM tbl_users WHERE email = ?";
+        PreparedStatement pst = dbc.connectDB().prepareStatement(query);
+        pst.setString(1, Email);
 
-            JOptionPane.showMessageDialog(null, "Login Success!");
-            
+        ResultSet rs = pst.executeQuery();
 
-            String role = rs.getString("type");
-            if ("Admin".equalsIgnoreCase(role)) {
-                new Admindashboard().setVisible(true);
-            } else {
-                new Userdashboard().setVisible(true);
+        if (rs.next()) {
+            String hashedpass = rs.getString("password");
+            String status = rs.getString("u_status");
+
+            // ✅ Check account status first
+            if (!status.equalsIgnoreCase("Active")) {
+                JOptionPane.showMessageDialog(null, "Account is not active!");
+                return;
             }
 
+            // ✅ Verify password
+            if (passUtil.verifyPassword(pass, hashedpass)) {
 
-            this.dispose();
+                Singleton singletonInstance = Singleton.getInstance();
+                singletonInstance.setId(rs.getInt("user_id"));
+                singletonInstance.setFirstname(rs.getString("u_fname"));
+                singletonInstance.setLastname(rs.getString("u_lname"));
+                singletonInstance.setEmail(rs.getString("email"));
+                singletonInstance.setU_status(status);
+
+                JOptionPane.showMessageDialog(null, "Login Success!");
+
+                String role = rs.getString("type");
+                if ("Admin".equalsIgnoreCase(role)) {
+                    new Admindashboard().setVisible(true);
+                } else {
+                    new Userdashboard().setVisible(true);
+                }
+
+                this.dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid Password!");
+                password.setText("");
+            }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Invalid Account!");
-            password.setText("");
+            JOptionPane.showMessageDialog(null, "User not found!");
         }
-    } else {
-        JOptionPane.showMessageDialog(null, "User not found!");
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage());
     }
-} catch (SQLException ex) {
-    JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage());
 }
-            }
     }//GEN-LAST:event_log_panelMouseClicked
 
     private void log_panelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_log_panelMouseEntered

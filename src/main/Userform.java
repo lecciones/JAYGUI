@@ -31,6 +31,36 @@ public class Userform extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        add = add = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int shadowSize = 5;
+                int borderRadius = 20;
+                int width = getWidth() - shadowSize * 2;
+                int height = getHeight() - shadowSize * 2;
+
+                // 1. Draw the Shadow
+                for (int i = 0; i < shadowSize; i++) {
+                    // Gradually fade the black color to create a soft blur
+                    g2.setColor(new java.awt.Color(0, 0, 0, (shadowSize - i) * 5)); 
+                    g2.drawRoundRect(shadowSize - i, shadowSize - i, width + i * 2, height + i * 2, borderRadius, borderRadius);
+                }
+
+                // 2. Fill the Main Panel (White Card)
+                g2.setColor(getBackground()); // Uses the color from the Design tab
+                g2.fillRoundRect(shadowSize, shadowSize, width, height, borderRadius, borderRadius);
+
+                g2.dispose();
+            }
+        };
+        // This makes the area outside the rounded card transparent
+        add.setOpaque(false);
+        st_label = new javax.swing.JLabel();
+        Status = new javax.swing.JComboBox<>();
+        type = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(253, 245, 230));
@@ -41,31 +71,129 @@ public class Userform extends javax.swing.JFrame {
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/A67B5B.png"))); // NOI18N
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 200, 60));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 0, 200, 60));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/coffe.png"))); // NOI18N
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 70, 60));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 70, 60));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 60));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 60));
 
         jPanel1.setBackground(new java.awt.Color(253, 245, 230));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 456, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
-        );
+        add.setBackground(new java.awt.Color(243, 156, 18));
+        add.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                addMousePressed(evt);
+            }
+        });
+        add.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 456, 410));
+        st_label.setBackground(new java.awt.Color(255, 255, 255));
+        st_label.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        st_label.setForeground(new java.awt.Color(255, 255, 255));
+        st_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        st_label.setText("LABEL");
+        add.add(st_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 110, 30));
+
+        jPanel1.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 210, 50));
+
+        Status.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Status.setForeground(new java.awt.Color(27, 42, 78));
+        Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Active" }));
+        jPanel1.add(Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, 200, 30));
+
+        type.setBackground(new java.awt.Color(240, 240, 240));
+        type.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        type.setForeground(new java.awt.Color(27, 42, 78));
+        type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
+        jPanel1.add(type, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 200, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 850, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
+        if (action.equals("Add")) {
+            int check = validateRegister();
+            if (check == 1) {
+                configclass dbc = new configclass();
+
+                int result = dbc.insertData("INSERT INTO users (u_fname, u_email, u_password, u_username, u_phone, u_type, u_status, Image) "
+                    + "VALUES ('" + fname.getText() + "', '" + email.getText() + "', '" + pword.getText() + "', "
+                    + "'" + uname.getText() + "', '" + con.getText() + "', '" + type.getSelectedItem() + "', '" + Status.getSelectedItem() + "', '" + destination + "')");
+
+                if (result == 1) {
+                    try {
+
+                        if (selectedFile != null && !destination.isEmpty()) {
+                            Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        }
+
+                        config.imageSession.getInstance().setImagePath(null);
+
+                        JOptionPane.showMessageDialog(null, "Successfully Saved!");
+                        close();
+                    } catch (IOException e) {
+                        System.out.println("Image storage error: " + e);
+                        JOptionPane.showMessageDialog(null, "Data saved, but image failed to copy.");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "All fields are required!");
+            }
+
+        } else if (action.equals("Update")) {
+            configclass dbc = new configclass();
+
+            String finalPath = (destination.isEmpty()) ? oldpath : destination;
+
+            dbc.updateData("UPDATE users SET u_fname = '" + fname.getText() + "', "
+                + "u_email = '" + email.getText() + "', "
+                + "u_password = '" + pword.getText() + "', "
+                + "u_username = '" + uname.getText() + "', "
+                + "u_phone = '" + con.getText() + "', "
+                + "u_type = '" + type.getSelectedItem() + "', "
+                + "u_status = '" + Status.getSelectedItem() + "', "
+                + "Image = '" + finalPath + "' "
+                + "WHERE u_id = '" + u_id.getText() + "'");
+
+            if (!destination.isEmpty()) {
+                imageUpdater(oldpath, path);
+            }
+
+            // Update the session so the UI reflects the change immediately
+            config.imageSession.getInstance().setImagePath(finalPath);
+
+            JOptionPane.showMessageDialog(null, "Successfully Updated!");
+            close();
+        }
+
+    }//GEN-LAST:event_addMouseClicked
+
+    private void addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseEntered
+        add.setBackground(new Color(255, 179, 71));
+    }//GEN-LAST:event_addMouseEntered
+
+    private void addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseExited
+        add.setBackground(new Color(243, 156, 18)) ;
+    }//GEN-LAST:event_addMouseExited
+
+    private void addMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMousePressed
+        add.setBackground(new Color(211, 84, 0));
+    }//GEN-LAST:event_addMousePressed
 
     /**
      * @param args the command line arguments
@@ -103,9 +231,13 @@ public class Userform extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JComboBox<String> Status;
+    public javax.swing.JPanel add;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    public javax.swing.JLabel st_label;
+    public javax.swing.JComboBox<String> type;
     // End of variables declaration//GEN-END:variables
 }

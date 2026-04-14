@@ -111,5 +111,18 @@
         System.out.println("Error displaying data: " + e.getMessage());
     }
 }
+                 
+                 public boolean isDuplicate(String sql) {
+ 
+    try (Connection conn = connectDB();
+         PreparedStatement pst = conn.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+        
+        return rs.next(); 
+    } catch (SQLException ex) {
+        System.out.println("Check Error: " + ex.getMessage());
+        return false;
+    }
+}
                     }
 

@@ -20,4 +20,10 @@ public class passUtil {
             return null;
         }
     }
+    
+       public static boolean verifyPassword(String inputPassword, String storedHash) {
+        String hashedInput = hashPassword(inputPassword);
+        return hashedInput != null && hashedInput.equals(storedHash);
+    }
 }
+

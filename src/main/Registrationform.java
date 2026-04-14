@@ -23,9 +23,9 @@ public class Registrationform extends javax.swing.JFrame {
     public Registrationform() {
         initComponents();
     }
-     int validateRegister(){
+    int validateRegister(){
          int result;
-        if(fname.getText().isEmpty() || lname.getText().isEmpty() || password.getText().isEmpty()){
+        if(fname.getText().isEmpty() || lname.getText().isEmpty() || email.getText().isEmpty() || password.getText().isEmpty()){
             result = 0;
         }else{
             result = 1;
@@ -208,15 +208,23 @@ public class Registrationform extends javax.swing.JFrame {
      int check = validateRegister();
         if(check == 1){
             
+        DBcon dbc = new DBcon();
+       
+            String checkQuery = "SELECT * FROM users WHERE u_username = '" + fname.getText() + "' OR u_email = '" + email.getText() + "'";
+        if (dbc.isDuplicate(checkQuery)) {
+            JOptionPane.showMessageDialog(null, "Username or Email is already taken!");
+            return; 
+        }
 
-                String pass;
+          
+                
             try {
-                pass = passUtil.hashPassword(password.getText());
+               String pass = passUtil.hashPassword(password.getText());
           
         
-            DBcon dbc = new DBcon();
-            int result = dbc.insertData("INSERT INTO tbl_users (u_fname, u_lname, email, password, u_status) "
-                    + "VALUES ('"+fname.getText()+"', '"+lname.getText()+"', '"+email.getText()+"', '"+pass+"', 'Pending')");
+      
+            int result = dbc.insertData("INSERT INTO tbl_users (u_fname, u_lname, email, password, u_status, type) "
+                    + "VALUES ('"+fname.getText()+"', '"+lname.getText()+"', '"+email.getText()+"', '"+pass+"', 'Pending', 'User')");
             if(result == 1){
                 JOptionPane.showMessageDialog(null, "Successfully Registered!");
                     Loginform  lf = new Loginform();
