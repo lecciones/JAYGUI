@@ -1,6 +1,9 @@
 package admin.Class;
 
 import admin.Admindashboard;
+import internal_pages.Customers_page;
+import internal_pages.Orders_page;
+import internal_pages.Products_page;
 import internal_pages.Users_page;
 import internal_pages.dashBoard_page;
 import java.awt.*;
@@ -34,8 +37,10 @@ public class SidebarPanel extends JPanel {
 
         add(menuButton("Dashboard", () -> openDashboard()));
         add(menuButton("Orders", () -> openOrders()));
-        add(menuButton("Menu", () -> openProducts()));         
+        add(menuButton("Products", () -> openProducts()));
+        add(menuButton("Customer", () -> openCustomers()));
         add(menuButton("Users", () -> openUsers()));
+        add(menuButton("Payments", () ->  openPayments()));
         add(Box.createVerticalGlue());
         add(menuButton("Account", () -> openAccount()));
     }
@@ -112,21 +117,27 @@ private void showInternalFrame(JInternalFrame newFrame) {
    
 }
 private void openOrders() {
-   
+    showInternalFrame(new Orders_page());
+}
+
+private void openProducts() {
+ showInternalFrame(new Products_page());
+}
+
+private void openCustomers(){
+     showInternalFrame(new Customers_page());
 }
 private void openUsers() {
  showInternalFrame(new Users_page());
    
 }
 
-private void openProducts() {
-
+private void openPayments() {
+  
 }
 
     private void openAccount() {
         
-    //   JOptionPane.showMessageDialog(this, "Logging out...");
-       
-      //  SwingUtilities.getWindowAncestor(this).dispose();
+   showInternalFrame(new dashBoard_page());
     }
 }

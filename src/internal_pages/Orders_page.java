@@ -5,6 +5,21 @@
  */
 package internal_pages;
 
+import config.DBcon;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
+import main.Orders_form;
+import main.Userform;
+
 /**
  *
  * @author admim
@@ -16,8 +31,82 @@ public class Orders_page extends javax.swing.JInternalFrame {
      */
     public Orders_page() {
         initComponents();
+        
+        displayData();
+        
+                 this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
+    BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
+    bi.setNorthPane(null);
+    
+    orders_table.setRowHeight(35); // Slightly taller for that premium feel
+orders_table.setShowGrid(false);
+orders_table.setIntercellSpacing(new java.awt.Dimension(0, 0));
+orders_table.setBackground(new Color(255, 252, 245)); // Very light cream base
+orders_table.setBorder(null);
+
+// 2. Custom Header Styling
+orders_table.getTableHeader().setOpaque(false);
+orders_table.getTableHeader().setPreferredSize(new java.awt.Dimension(100, 40));
+
+orders_table.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        // The warm tan color from the image header
+        setBackground(new Color(235, 215, 185)); 
+        setForeground(new Color(90, 60, 40)); // Dark brown text
+        setFont(new Font("Segoe UI", Font.BOLD, 15));
+        
+        setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 15));
+        return this;
+    }
+});
+
+
+orders_table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        c.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        
+        if (isSelected) {
+            // Highlighting with a slightly darker tan/orange from the image buttons
+            c.setBackground(new Color(225, 190, 150)); 
+            c.setForeground(new Color(60, 30, 10)); 
+        } else {
+            // Zebra striping: Alternates between white and the light beige in the image
+            c.setBackground(row % 2 == 0 ? Color.WHITE : new Color(250, 243, 230));
+            c.setForeground(new Color(60, 40, 30)); // Deep brown text
+        }
+
+        ((JLabel)c).setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 15));
+        return c;
+    }
+});
+
+
+javax.swing.border.Border line = javax.swing.BorderFactory.createLineBorder(new Color(180, 160, 140), 1);
+jScrollPane1.setBorder(line);
+jScrollPane1.getViewport().setBackground(Color.WHITE);
     }
 
+    public void displayData() {
+    config.DBcon cc = new config.DBcon();
+    cc.displayData("SELECT o_id as 'Order ID', c_id as 'Customer ID', "
+                 + "order_date as 'Date', amount as 'Total Amount' "
+                 + "FROM tbl_orders", orders_table);
+}
+    
+public void displayData(String search) {
+    config.DBcon cc = new config.DBcon();
+    String query = "SELECT o_id as 'Order ID', c_id as 'Customer ID', "
+                 + "order_date as 'Date', amount as 'Total Amount' "
+                 + "FROM tbl_orders WHERE o_id LIKE '%"+search+"%' OR c_id LIKE '%"+search+"%'";
+    cc.displayData(query, orders_table);
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,26 +118,106 @@ public class Orders_page extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        orders_table = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        add = add = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int shadowSize = 5;
+                int borderRadius = 10;
+                int width = getWidth() - shadowSize * 2;
+                int height = getHeight() - shadowSize * 2;
+
+                // 1. Draw the Shadow
+                for (int i = 0; i < shadowSize; i++) {
+                    // Gradually fade the black color to create a soft blur
+                    g2.setColor(new java.awt.Color(0, 0, 0, (shadowSize - i) * 5)); 
+                    g2.drawRoundRect(shadowSize - i, shadowSize - i, width + i * 2, height + i * 2, borderRadius, borderRadius);
+                }
+
+                // 2. Fill the Main Panel (White Card)
+                g2.setColor(getBackground()); // Uses the color from the Design tab
+                g2.fillRoundRect(shadowSize, shadowSize, width, height, borderRadius, borderRadius);
+
+                g2.dispose();
+            }
+        };
+        // This makes the area outside the rounded card transparent
+        add.setOpaque(false);
+        ;
         jLabel2 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        edit = edit = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int shadowSize = 5;
+                int borderRadius = 10;
+                int width = getWidth() - shadowSize * 2;
+                int height = getHeight() - shadowSize * 2;
+
+                // 1. Draw the Shadow
+                for (int i = 0; i < shadowSize; i++) {
+                    // Gradually fade the black color to create a soft blur
+                    g2.setColor(new java.awt.Color(0, 0, 0, (shadowSize - i) * 5)); 
+                    g2.drawRoundRect(shadowSize - i, shadowSize - i, width + i * 2, height + i * 2, borderRadius, borderRadius);
+                }
+
+                // 2. Fill the Main Panel (White Card)
+                g2.setColor(getBackground()); // Uses the color from the Design tab
+                g2.fillRoundRect(shadowSize, shadowSize, width, height, borderRadius, borderRadius);
+
+                g2.dispose();
+            }
+        };
+        // This makes the area outside the rounded card transparent
+        edit.setOpaque(false);
+        ;
         jLabel3 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        delete = delete = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int shadowSize = 5;
+                int borderRadius = 10;
+                int width = getWidth() - shadowSize * 2;
+                int height = getHeight() - shadowSize * 2;
+
+                // 1. Draw the Shadow
+                for (int i = 0; i < shadowSize; i++) {
+                    // Gradually fade the black color to create a soft blur
+                    g2.setColor(new java.awt.Color(0, 0, 0, (shadowSize - i) * 5)); 
+                    g2.drawRoundRect(shadowSize - i, shadowSize - i, width + i * 2, height + i * 2, borderRadius, borderRadius);
+                }
+
+                // 2. Fill the Main Panel (White Card)
+                g2.setColor(getBackground()); // Uses the color from the Design tab
+                g2.fillRoundRect(shadowSize, shadowSize, width, height, borderRadius, borderRadius);
+
+                g2.dispose();
+            }
+        };
+        // This makes the area outside the rounded card transparent
+        delete.setOpaque(false);
+        ;
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(253, 245, 230));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        orders_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -56,7 +225,7 @@ public class Orders_page extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(orders_table);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 610, 270));
 
@@ -76,60 +245,216 @@ public class Orders_page extends javax.swing.JInternalFrame {
         jLabel1.setBackground(new java.awt.Color(62, 39, 35));
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 26)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(62, 39, 35));
-        jLabel1.setText("CUSTOMER MANAGEMENT");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
+        jLabel1.setText("ORDER MANAGEMENT");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add.setBackground(new java.awt.Color(220, 210, 190));
+        add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                addMousePressed(evt);
+            }
+        });
+        add.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(92, 50, 22));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Add User");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        add.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 100, 30));
+        jPanel1.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 100, 30));
 
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        edit.setBackground(new java.awt.Color(235, 215, 185));
+        edit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                editMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                editMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editMousePressed(evt);
+            }
+        });
+        edit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(92, 50, 22));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Edit User");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 30));
+        edit.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 70, 30));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 110, 30));
+        jPanel1.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 110, 30));
 
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        delete.setBackground(new java.awt.Color(220, 210, 190));
+        delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteMouseExited(evt);
+            }
+        });
+        delete.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(92, 50, 22));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Delete User");
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 30));
+        delete.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 80, 30));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 120, 30));
+        jPanel1.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 120, 30));
 
+        jTextField1.setBackground(new java.awt.Color(253, 245, 230));
+        jTextField1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, java.awt.Color.gray, null, new java.awt.Color(153, 153, 153)));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 170, 30));
-
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 100, 40, 30));
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 220, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();
+        Orders_form stf = new Orders_form();
+        stf.setVisible(true);
+        stf.action = "Add";
+        stf.st_label.setText("SAVE");
+    }//GEN-LAST:event_addMouseClicked
+
+    private void addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseEntered
+        add.setBackground(new Color(245, 230, 210));
+    }//GEN-LAST:event_addMouseEntered
+
+    private void addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseExited
+        add.setBackground(new Color(252, 248, 240));
+    }//GEN-LAST:event_addMouseExited
+
+    private void addMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMousePressed
+        add.setBackground(new Color(230, 220, 200));
+    }//GEN-LAST:event_addMousePressed
+
+    private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
+       int rowIndex = orders_table.getSelectedRow();
+
+    if (rowIndex < 0) {
+        JOptionPane.showMessageDialog(null, "Please Select an Order!");
+    } else {
+        TableModel model = orders_table.getModel();
+        Orders_form of = new Orders_form();
+
+        // 1. Map Table Data to the Orders_form components
+        // model.getValueAt(rowIndex, ColumnIndex)
+        of.or_id.setText("" + model.getValueAt(rowIndex, 0));      // Order ID
+        
+        // Setting the Spinner value (Customer ID)
+        of.cId.setValue(model.getValueAt(rowIndex, 1));           // Customer ID
+        
+        of.orderdate.setText("" + model.getValueAt(rowIndex, 2));  // Order Date
+        of.amount.setText("" + model.getValueAt(rowIndex, 3));     // Total Amount
+
+        // 2. Configure form for Update mode
+        of.setVisible(true);
+        of.action = "Update";
+        of.st_label.setText("UPDATE");
+
+        // 3. Close the current dashboard window to show the standalone form
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();
+        
+        of.pack();
+        of.setLocationRelativeTo(null);
+    }
+    }//GEN-LAST:event_editMouseClicked
+
+    private void editMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseEntered
+        edit.setBackground(new Color(225, 205, 175));
+    }//GEN-LAST:event_editMouseEntered
+
+    private void editMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseExited
+        edit.setBackground(new Color(235, 215, 185));
+    }//GEN-LAST:event_editMouseExited
+
+    private void editMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMousePressed
+        edit.setBackground(new Color(210, 188, 155));
+    }//GEN-LAST:event_editMousePressed
+
+    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+       int rowIndex = orders_table.getSelectedRow();
+    
+    if(rowIndex < 0){
+        JOptionPane.showMessageDialog(null, "Please select an order from the table!");
+    } else {
+        TableModel model = orders_table.getModel();
+        Object value = model.getValueAt(rowIndex, 0); // Gets o_id from the first column
+        String id = value.toString();
+        
+        // Customizing the message to be Order-specific
+        int a = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete Order ID: " + id + "?", "Delete Confirmation", JOptionPane.YES_NO_OPTION);
+        
+        if(a == JOptionPane.YES_OPTION){
+            DBcon dbc = new DBcon();
+            try {
+                int order_id = Integer.parseInt(id);
+                // Matches your DB schema: table "tbl_orders" and primary key "o_id"
+                dbc.deleteData(order_id, "tbl_orders", "o_id");
+                
+                // Refresh the table to show the record is gone
+                displayData(); 
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid Order ID format.");
+            }
+        }
+    }
+    }//GEN-LAST:event_deleteMouseClicked
+
+    private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
+        delete.setBackground(new Color(245, 230, 210));
+    }//GEN-LAST:event_deleteMouseEntered
+
+    private void deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseExited
+      delete.setBackground(new Color(220, 210, 190));
+    }//GEN-LAST:event_deleteMouseExited
+
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+      displayData(jTextField1.getText());
+    }//GEN-LAST:event_jTextField1KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel add;
+    private javax.swing.JPanel delete;
+    private javax.swing.JPanel edit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -138,12 +463,8 @@ public class Orders_page extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable orders_table;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,7 +25,7 @@ public class Registrationform extends javax.swing.JFrame {
     }
     int validateRegister(){
          int result;
-        if(fname.getText().isEmpty() || lname.getText().isEmpty() || email.getText().isEmpty() || password.getText().isEmpty()){
+        if(email.getText().isEmpty() || fname.getText().isEmpty() || contact.getText().isEmpty() || password.getText().isEmpty()){
             result = 0;
         }else{
             result = 1;
@@ -94,10 +94,10 @@ public class Registrationform extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        fname = new javax.swing.JTextField();
-        lname = new javax.swing.JTextField();
+        contact = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
+        fname = new javax.swing.JTextField();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -167,17 +167,18 @@ public class Registrationform extends javax.swing.JFrame {
         });
         registerPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
 
-        fname.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        fname.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 217, 200), 1, true), "First Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
-        registerPanel.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 280, 60));
-
-        lname.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lname.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 217, 200), 1, true), "Last Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
-        registerPanel.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 280, 60));
+        contact.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        contact.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 217, 200), 1, true), "Contact", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
+        contact.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contactActionPerformed(evt);
+            }
+        });
+        registerPanel.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 280, 60));
 
         email.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         email.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 217, 200), 1, true), "Email Address", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
-        registerPanel.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 280, 60));
+        registerPanel.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 280, 60));
 
         password.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
         password.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(215, 194, 178), 1, true), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
@@ -187,6 +188,10 @@ public class Registrationform extends javax.swing.JFrame {
             }
         });
         registerPanel.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 280, 60));
+
+        fname.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        fname.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(232, 217, 200), 1, true), "First Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic Medium", 0, 14), new java.awt.Color(92, 50, 22))); // NOI18N
+        registerPanel.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 280, 60));
 
         getContentPane().add(registerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 340, 410));
 
@@ -206,47 +211,50 @@ public class Registrationform extends javax.swing.JFrame {
 
     private void sign_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_btnMouseClicked
      int check = validateRegister();
-        if(check == 1){
-            
+    
+    if (check == 1) {
         DBcon dbc = new DBcon();
-       
-            String checkQuery = "SELECT * FROM users WHERE u_username = '" + fname.getText() + "' OR u_email = '" + email.getText() + "'";
+        
+        // Use only the email for duplicate checking to ensure account uniqueness
+        String checkQuery = "SELECT * FROM tbl_users WHERE email = '" + email.getText() + "'";
+        
         if (dbc.isDuplicate(checkQuery)) {
-            JOptionPane.showMessageDialog(null, "Username or Email is already taken!");
+            JOptionPane.showMessageDialog(null, "This Email is already registered!");
             return; 
         }
 
-          
-                
-            try {
-               String pass = passUtil.hashPassword(password.getText());
-          
-        
-      
-            int result = dbc.insertData("INSERT INTO tbl_users (u_fname, u_lname, email, password, u_status, type) "
-                    + "VALUES ('"+fname.getText()+"', '"+lname.getText()+"', '"+email.getText()+"', '"+pass+"', 'Pending', 'User')");
-            if(result == 1){
-                JOptionPane.showMessageDialog(null, "Successfully Registered!");
-                    Loginform  lf = new Loginform();
-                    this.dispose();
-                    lf.setVisible(true);
-              
-                    
-            }
-            else{
-                 System.out.println("Saving Data Failed!");
-            }
-} catch (Exception ex) { 
-       
-        System.out.println("Error: " + ex);
-    }
-      
-          
+        try {
+            // Hash the password for security
+            String hashedPass = passUtil.hashPassword(password.getText());
             
-        }else{
-             JOptionPane.showMessageDialog(null, "All fields are required!");
+            // Construct the query carefully
+            // Column Order: email, u_fname, contact, password, u_status, type
+            String sql = "INSERT INTO tbl_users (email, u_fname, contact, password, u_status, type) "
+                       + "VALUES ("
+                       + "'" + email.getText() + "', "
+                       + "'" + fname.getText() + "', "
+                       + "'" + contact.getText() + "', "
+                       + "'" + hashedPass + "', "
+                       + "'Pending', "
+                       + "'User')";
+
+            int result = dbc.insertData(sql);
+
+            if (result == 1) {
+                JOptionPane.showMessageDialog(null, "Successfully Registered!");
+                Loginform lf = new Loginform();
+                this.dispose();
+                lf.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Database Error: Could not save data.");
+            }
+        } catch (Exception ex) { 
+            System.out.println("Error: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "An unexpected error occurred.");
         }
- 
+    } else {
+        JOptionPane.showMessageDialog(null, "Please fill out all fields correctly!");
+    }
     }//GEN-LAST:event_sign_btnMouseClicked
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
@@ -268,6 +276,10 @@ public class Registrationform extends javax.swing.JFrame {
     private void sign_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_btnMouseReleased
        sign_btn.setBackground(new Color(217,167,60));
     }//GEN-LAST:event_sign_btnMouseReleased
+
+    private void contactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contactActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,6 +318,7 @@ public class Registrationform extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JTextField contact;
     private javax.swing.JTextField email;
     private javax.swing.JTextField fname;
     private javax.swing.JLabel jLabel1;
@@ -314,7 +327,6 @@ public class Registrationform extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField lname;
     private javax.swing.JPasswordField password;
     private javax.swing.JPanel registerPanel;
     private javax.swing.JPanel sign_btn;

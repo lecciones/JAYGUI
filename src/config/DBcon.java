@@ -14,16 +14,22 @@
                  
                   public Connection connect;
 
-               public static Connection connectDB() {
-                    Connection con = null;
-                    try {
-                        Class.forName("org.sqlite.JDBC"); // Load the SQLite JDBC driver
-                        con = DriverManager.getConnection("jdbc:sqlite:users.db"); // Establish connection
-                        System.out.println("Connection Successful");
-                    } catch (Exception e) {
-                        System.out.println("Connection Failed: " + e);
-                    }
-                    return con;
+             public DBcon() {
+        connect = connectDB(); 
+    }
+    // ----------------------------
+
+             public static Connection connectDB() {
+        Connection con = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:brew&bean.db"); 
+            System.out.println("Connection Successful");
+        } catch (Exception e) {
+            System.out.println("Connection Failed: " + e);
+        }
+        return con;
+    
                 }
 
                public ResultSet getData(String sql) throws SQLException{

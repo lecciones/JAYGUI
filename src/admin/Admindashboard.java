@@ -173,14 +173,14 @@ SidebarPanel sidebar = new SidebarPanel(contentPanel); sidebar.setVisible(false)
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 420, Short.MAX_VALUE)
         );
 
-        mainPanel.add(contentPanel, java.awt.BorderLayout.CENTER);
+        mainPanel.add(contentPanel, java.awt.BorderLayout.LINE_START);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -233,7 +233,7 @@ SidebarPanel sidebar = new SidebarPanel(contentPanel); sidebar.setVisible(false)
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane contentPanel;
+    public javax.swing.JDesktopPane contentPanel;
     private admin.Class.HamburgerButton hamburgerButton1;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel1;

@@ -113,13 +113,95 @@ jScrollPane1.getViewport().setBackground(Color.WHITE);
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        add = new javax.swing.JPanel();
+        add = add = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int shadowSize = 5;
+                int borderRadius = 10;
+                int width = getWidth() - shadowSize * 2;
+                int height = getHeight() - shadowSize * 2;
+
+                // 1. Draw the Shadow
+                for (int i = 0; i < shadowSize; i++) {
+                    // Gradually fade the black color to create a soft blur
+                    g2.setColor(new java.awt.Color(0, 0, 0, (shadowSize - i) * 5)); 
+                    g2.drawRoundRect(shadowSize - i, shadowSize - i, width + i * 2, height + i * 2, borderRadius, borderRadius);
+                }
+
+                // 2. Fill the Main Panel (White Card)
+                g2.setColor(getBackground()); // Uses the color from the Design tab
+                g2.fillRoundRect(shadowSize, shadowSize, width, height, borderRadius, borderRadius);
+
+                g2.dispose();
+            }
+        };
+        // This makes the area outside the rounded card transparent
+        add.setOpaque(false);
+        ;
         jLabel2 = new javax.swing.JLabel();
-        edit = new javax.swing.JPanel();
+        edit = edit = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int shadowSize = 5;
+                int borderRadius = 10;
+                int width = getWidth() - shadowSize * 2;
+                int height = getHeight() - shadowSize * 2;
+
+                // 1. Draw the Shadow
+                for (int i = 0; i < shadowSize; i++) {
+                    // Gradually fade the black color to create a soft blur
+                    g2.setColor(new java.awt.Color(0, 0, 0, (shadowSize - i) * 5)); 
+                    g2.drawRoundRect(shadowSize - i, shadowSize - i, width + i * 2, height + i * 2, borderRadius, borderRadius);
+                }
+
+                // 2. Fill the Main Panel (White Card)
+                g2.setColor(getBackground()); // Uses the color from the Design tab
+                g2.fillRoundRect(shadowSize, shadowSize, width, height, borderRadius, borderRadius);
+
+                g2.dispose();
+            }
+        };
+        // This makes the area outside the rounded card transparent
+        edit.setOpaque(false);
+        ;
         jLabel3 = new javax.swing.JLabel();
-        delete = new javax.swing.JPanel();
+        delete = delete = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int shadowSize = 5;
+                int borderRadius = 10;
+                int width = getWidth() - shadowSize * 2;
+                int height = getHeight() - shadowSize * 2;
+
+                // 1. Draw the Shadow
+                for (int i = 0; i < shadowSize; i++) {
+                    // Gradually fade the black color to create a soft blur
+                    g2.setColor(new java.awt.Color(0, 0, 0, (shadowSize - i) * 5)); 
+                    g2.drawRoundRect(shadowSize - i, shadowSize - i, width + i * 2, height + i * 2, borderRadius, borderRadius);
+                }
+
+                // 2. Fill the Main Panel (White Card)
+                g2.setColor(getBackground()); // Uses the color from the Design tab
+                g2.fillRoundRect(shadowSize, shadowSize, width, height, borderRadius, borderRadius);
+
+                g2.dispose();
+            }
+        };
+        // This makes the area outside the rounded card transparent
+        delete.setOpaque(false);
+        ;
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -239,6 +321,10 @@ jScrollPane1.getViewport().setBackground(Color.WHITE);
         });
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 170, 30));
 
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/search_icon.png"))); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 100, 40, 30));
+
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 100, 40, 30));
 
@@ -261,31 +347,34 @@ jScrollPane1.getViewport().setBackground(Color.WHITE);
     }//GEN-LAST:event_addMouseClicked
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        int rowIndex = user_table.getSelectedRow();
-    if(rowIndex < 0){
-        JOptionPane.showMessageDialog(null, "Please Select an Item!");
-    }else{
-        TableModel model = user_table.getModel();
-        Userform stf = new Userform();
-        
-       
-        stf.u_id.setText(""+model.getValueAt(rowIndex, 0));
-        stf.fname.setText(""+model.getValueAt(rowIndex, 1));
-        stf.email.setText(""+model.getValueAt(rowIndex, 2));
-        stf.pword.setText(""+model.getValueAt(rowIndex, 3));
-        stf.uname.setText(model.getValueAt(rowIndex, 4).toString());
-        stf.con.setText(model.getValueAt(rowIndex, 5).toString());
-        stf.Status.setSelectedItem(model.getValueAt(rowIndex, 6).toString());
-        stf.type.setSelectedItem(model.getValueAt(rowIndex, 7).toString());
+   int rowIndex = user_table.getSelectedRow();
 
-        stf.setVisible(true);
-        stf.action = "Update";
-        stf.st_label.setText("UPDATE");
-        
-        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        mainFrame.dispose();
-    }
+if (rowIndex < 0) {
+    JOptionPane.showMessageDialog(null, "Please Select an Item!");
+} else {
+    TableModel model = user_table.getModel();
+    Userform stf = new Userform();
+    
+   
+    stf.id.setText("" + model.getValueAt(rowIndex, 0)); 
+    stf.em.setText("" + model.getValueAt(rowIndex, 1));
+    stf.fname.setText("" + model.getValueAt(rowIndex, 2));
+    stf.cont.setText("" + model.getValueAt(rowIndex, 3));
+    stf.pass.setText("" + model.getValueAt(rowIndex, 4));
 
+    // Updated ComboBox indices to 5 and 6
+    stf.Status.setSelectedItem(model.getValueAt(rowIndex, 5).toString());
+    stf.type.setSelectedItem(model.getValueAt(rowIndex, 6).toString());
+
+    // Configure form for Update mode
+    stf.setVisible(true);
+    stf.action = "Update";
+    stf.st_label.setText("UPDATE STAFF PROFILE");
+    
+    // Centers the form on screen
+    stf.pack();
+    stf.setLocationRelativeTo(null);
+}
     }//GEN-LAST:event_editMouseClicked
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
@@ -300,7 +389,7 @@ jScrollPane1.getViewport().setBackground(Color.WHITE);
             if(a == JOptionPane.YES_OPTION){
                 DBcon dbc = new DBcon();
                 int u_id = Integer.parseInt(id);
-                dbc.deleteData(u_id, "users", "u_id");
+                dbc.deleteData(u_id, "tbl_users", "u_id");
                 displayData();
             }
         }
@@ -347,6 +436,7 @@ jScrollPane1.getViewport().setBackground(Color.WHITE);
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;

@@ -200,65 +200,70 @@ public class Loginform extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void log_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_log_panelMouseClicked
-    String Email = email.getText().toString();
-String pass = new String(password.getPassword());
+ String Email = email.getText().trim();
+    String pass = new String(password.getPassword());
 
-if (Email.isEmpty() || pass.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "All Fields are Required!");
-} else {
-    try {
-        DBcon dbc = new DBcon();
+    if (Email.isEmpty() || pass.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "All Fields are Required!");
+        return;
+    }
 
-        String query = "SELECT * FROM tbl_users WHERE email = ?";
-        PreparedStatement pst = dbc.connectDB().prepareStatement(query);
+    DBcon dbc = new DBcon();
+    String query = "SELECT * FROM tbl_users WHERE email = ?";
+
+    // Try-with-resources ensures the Connection and Statement close automatically
+    try (java.sql.Connection con = dbc.connectDB();
+         PreparedStatement pst = con.prepareStatement(query)) {
+        
         pst.setString(1, Email);
 
-        ResultSet rs = pst.executeQuery();
+        try (ResultSet rs = pst.executeQuery()) {
+            if (rs.next()) {
+                String hashedpass = rs.getString("password");
+                String status = rs.getString("u_status");
 
-        if (rs.next()) {
-            String hashedpass = rs.getString("password");
-            String status = rs.getString("u_status");
-
-            // ✅ Check account status first
-            if (!status.equalsIgnoreCase("Active")) {
-                JOptionPane.showMessageDialog(null, "Account is not active!");
-                return;
-            }
-
-            // ✅ Verify password
-            if (passUtil.verifyPassword(pass, hashedpass)) {
-
-                Singleton singletonInstance = Singleton.getInstance();
-                singletonInstance.setId(rs.getInt("user_id"));
-                singletonInstance.setFirstname(rs.getString("u_fname"));
-                singletonInstance.setLastname(rs.getString("u_lname"));
-                singletonInstance.setEmail(rs.getString("email"));
-                singletonInstance.setU_status(status);
-
-                JOptionPane.showMessageDialog(null, "Login Success!");
-
-                String role = rs.getString("type");
-                if ("Admin".equalsIgnoreCase(role)) {
-                    new Admindashboard().setVisible(true);
-                } else {
-                    new Userdashboard().setVisible(true);
+                // 1. Account Status Validation
+                if (!status.equalsIgnoreCase("Active")) {
+                    JOptionPane.showMessageDialog(null, "Account Status: " + status + ". Please wait for Admin approval.");
+                    return;
                 }
 
-                this.dispose();
+                // 2. Password Verification
+                if (passUtil.verifyPassword(pass, hashedpass)) {
+
+                    // 3. Populate Session (Singleton) - Columns verified via image_975a33.png
+                    Singleton session = Singleton.getInstance();
+                    session.setId(rs.getInt("u_id"));
+                    session.setEmail(rs.getString("email"));
+                    session.setFirstname(rs.getString("u_fname"));
+                    session.setLastname(rs.getString("contact")); // Mapping contact to lastname field
+                    session.setU_status(status);
+
+                    JOptionPane.showMessageDialog(null, "Login Success!");
+
+                    // 4. Role-based Navigation
+                    String role = rs.getString("type");
+                    if ("Admin".equalsIgnoreCase(role)) {
+                        new Admindashboard().setVisible(true);
+                    } else {
+                        new Userdashboard().setVisible(true);
+                    }
+
+                    this.dispose();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Password!");
+                    password.setText("");
+                }
 
             } else {
-                JOptionPane.showMessageDialog(null, "Invalid Password!");
-                password.setText("");
+                JOptionPane.showMessageDialog(null, "User not found!");
             }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "User not found!");
         }
-
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage());
+        ex.printStackTrace();
     }
-}
     }//GEN-LAST:event_log_panelMouseClicked
 
     private void log_panelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_log_panelMouseEntered
