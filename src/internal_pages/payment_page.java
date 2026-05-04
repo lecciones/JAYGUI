@@ -29,7 +29,9 @@ public class payment_page extends javax.swing.JInternalFrame {
      * Creates new form payment_page
      */
     public payment_page() {
+       
         initComponents();
+         displayData();
                this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
     BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
     bi.setNorthPane(null);

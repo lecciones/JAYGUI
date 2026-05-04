@@ -1,6 +1,5 @@
 package User.Class;
 
-import User.Class.*;
 import User.Userdashboard;
 import internal_pages.Customers_page;
 import internal_pages.Orders_page;
@@ -10,7 +9,6 @@ import internal_pages.payment_page;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JDesktopPane;
 import main.Products_form;
 
@@ -38,7 +36,7 @@ public class SidebarPanel extends JPanel {
         add(menuButton("Dashboard", () -> openDashboard()));
         add(menuButton("Orders", () -> openOrders()));
         add(menuButton("Menu", () -> openMenu())); 
-        add(menuButton("Customers", () -> openCustomers()));         
+        add(menuButton("Customers", () -> openCustomers()));           
         add(menuButton("payments", () -> openPayments()));
         add(Box.createVerticalGlue());
         add(menuButton("Logout", () -> logout()));
@@ -81,33 +79,24 @@ public class SidebarPanel extends JPanel {
     public void toggle() {
         visible = !visible;
         setVisible(visible);
+        if (contentPanel.getAllFrames().length > 0) {
+            repositionFrame(contentPanel.getAllFrames()[0]);
+        }
     }
 
     private void showInternalFrame(JInternalFrame newFrame) {
-        // 1. Clear existing frames
         for (JInternalFrame frame : contentPanel.getAllFrames()) {
             frame.dispose();
         }
 
-        // 2. Add to container
         contentPanel.add(newFrame);
-        
-        // 3. Remove decorations
         newFrame.setBorder(null);
-        javax.swing.plaf.basic.BasicInternalFrameUI ui = (javax.swing.plaf.basic.BasicInternalFrameUI)newFrame.getUI();
+        
+        javax.swing.plaf.basic.BasicInternalFrameUI ui = 
+            (javax.swing.plaf.basic.BasicInternalFrameUI)newFrame.getUI();
         ui.setNorthPane(null);
 
-        // 4. SET SIZE: Use the original design size
-        Dimension d = newFrame.getPreferredSize();
-        newFrame.setSize(d); 
-        
-        // 5. SET LOCATION: Center it horizontally and put it at the top
-        // This ensures it doesn't hug the left edge/sidebar
-        int x = (contentPanel.getWidth() - d.width) / 2;
-        int y = 0; 
-        
-        // Safety check: if calculation is negative, default to 0
-        newFrame.setLocation(Math.max(0, x), y); 
+        repositionFrame(newFrame);
 
         newFrame.setVisible(true);
         
@@ -119,6 +108,37 @@ public class SidebarPanel extends JPanel {
         contentPanel.repaint();
     }
 
+private void repositionFrame(JInternalFrame frame) {
+    // Using a Timer to ensure the parent components have finished layout out
+    Timer timer = new Timer(100, (e) -> {
+        // 1. Get the actual visible width of the content area
+        int availableWidth = contentPanel.getWidth();
+        int availableHeight = contentPanel.getHeight();
+
+        // 2. Determine the preferred size of your catalog
+        Dimension frameSize = frame.getPreferredSize();
+        
+        // 3. FORCE SIZE: If the frame is too big for the panel, 
+        // we must shrink the frame, otherwise it will always be cut off.
+        int finalWidth = Math.min(frameSize.width, availableWidth);
+        int finalHeight = Math.min(frameSize.height, availableHeight);
+        frame.setSize(finalWidth, finalHeight);
+
+        // 4. CALCULATE FAR RIGHT POSITION
+        // We take the total width and subtract the frame's width.
+        // This pins the right edge of the catalog to the right edge of the screen.
+        int x = availableWidth - finalWidth;
+        
+        // 5. SET LOCATION (Top-Right)
+        // We use 0 for Y to move it to the very top as requested.
+        frame.setLocation(Math.max(0, x), 0);
+        
+        contentPanel.revalidate();
+        contentPanel.repaint();
+    });
+    timer.setRepeats(false);
+    timer.start();
+}
     private void openDashboard() {
         showInternalFrame(new dashBoard_page());
     }
@@ -128,14 +148,10 @@ public class SidebarPanel extends JPanel {
     }
 
     private void openMenu() {
-        // Wrapper for JFrame to JInternalFrame compatibility
         Products_form pf = new Products_form();
         JInternalFrame wrapper = new JInternalFrame();
         wrapper.setContentPane(pf.getContentPane());
-        
-        // Sync the size of the wrapper to the original JFrame's size
         wrapper.setPreferredSize(pf.getPreferredSize());
-        
         showInternalFrame(wrapper);
     }
 

@@ -19,6 +19,7 @@ private int selectedProductId = -1;
      */
     public Products_form() {
         initComponents();
+        this.setBackground(new java.awt.Color(0, 0, 0, 0));
         
         loadProductsFromDB();
     }
@@ -497,6 +498,7 @@ public void loadProductsFromDB() {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(253, 245, 230));
@@ -707,6 +709,7 @@ public void loadProductsFromDB() {
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 520));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void addto_cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addto_cartMouseClicked
